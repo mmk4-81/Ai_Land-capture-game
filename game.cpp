@@ -14,6 +14,7 @@ GameBoard createGameBoard(int n);
 void destroyGameBoard(GameBoard &game);
 void printBoard(const GameBoard &game);
 bool isBoardFull(const GameBoard& game);
+bool isCellEmpty(const GameBoard& game, int row, int col);
 bool isMovvalueid(const GameBoard& game, int row, int col, char userMarker);
 bool hasValidMove(const GameBoard& game, char userMarker);
 
@@ -134,6 +135,9 @@ bool isBoardFull(const GameBoard& game) {
     return true;
 }
 
+bool isCellEmpty(const GameBoard& game, int row, int col) {
+    return game.board[row][col] == ' ';
+}
 bool isMovvalueid(const GameBoard& game, int row, int col, char Marker) {
     if (row < 1 || row > game.size || col < 1 || col > game.size) {
         return false;

@@ -17,8 +17,8 @@ bool isBoardFull(const GameBoard &game);
 bool isCellEmpty(const GameBoard &game, int row, int col);
 bool isMovvalueid(const GameBoard &game, int row, int col, char userMarker);
 bool hasValidMove(const GameBoard &game, char userMarker);
-void markCell(GameBoard& game, int row, int col, char marker);
-bool makeMove(GameBoard& game, int row, int col, char userMarker);
+void markCell(GameBoard &game, int row, int col, char marker);
+bool makeMove(GameBoard &game, int row, int col, char userMarker);
 
 void playgame(GameBoard &game, char userMarker, char computerMarker);
 
@@ -165,12 +165,15 @@ bool hasValidMove(const GameBoard &game, char userMarker)
     }
     return false;
 }
-void markCell(GameBoard& game, int row, int col, char marker) {
+void markCell(GameBoard &game, int row, int col, char marker)
+{
     game.board[row][col] = marker;
 }
-bool makeMove(GameBoard& game, int row, int col, char userMarker) {
-    if (isMovvalueid(game, row, col, userMarker)) {
-        
+bool makeMove(GameBoard &game, int row, int col, char userMarker)
+{
+    if (isMovvalueid(game, row, col, userMarker))
+    {
+        markCell(game, row, col, userMarker);
         return true;
     }
     return false;

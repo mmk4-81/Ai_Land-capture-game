@@ -13,10 +13,10 @@ int boardSize;
 GameBoard createGameBoard(int n);
 void destroyGameBoard(GameBoard &game);
 void printBoard(const GameBoard &game);
-bool isBoardFull(const GameBoard& game);
-bool isCellEmpty(const GameBoard& game, int row, int col);
-bool isMovvalueid(const GameBoard& game, int row, int col, char userMarker);
-bool hasValidMove(const GameBoard& game, char userMarker);
+bool isBoardFull(const GameBoard &game);
+bool isCellEmpty(const GameBoard &game, int row, int col);
+bool isMovvalueid(const GameBoard &game, int row, int col, char userMarker);
+bool hasValidMove(const GameBoard &game, char userMarker);
 
 void playgame(GameBoard &game, char userMarker, char computerMarker);
 
@@ -122,35 +122,43 @@ void printBoard(const GameBoard &game)
     }
     cout << "+" << endl;
 }
-bool isBoardFull(const GameBoard& game) {
-    for (int i = 1; i <= game.size; i++) {
-        for (int j = 1; j <= game.size; j++) {
+bool isBoardFull(const GameBoard &game)
+{
+    for (int i = 1; i <= game.size; i++)
+    {
+        for (int j = 1; j <= game.size; j++)
+        {
             if (game.board[i][j] == ' ')
                 return false;
         }
     }
     return true;
 }
-bool isCellEmpty(const GameBoard& game, int row, int col) {
+bool isCellEmpty(const GameBoard &game, int row, int col)
+{
     return game.board[row][col] == ' ';
 }
-bool isMovvalueid(const GameBoard& game, int row, int col, char Marker) {
-    if (row < 1 || row > game.size || col < 1 || col > game.size) {
+bool isMovvalueid(const GameBoard &game, int row, int col, char Marker)
+{
+    if (row < 1 || row > game.size || col < 1 || col > game.size)
+    {
         return false;
     }
-     return isCellEmpty(game, row, col) && (
-        (row - 1 >= 1 && game.board[row - 1][col] == Marker) ||
-        (row + 1 <= game.size && game.board[row + 1][col] == Marker) ||
-        (col - 1 >= 1 && game.board[row][col - 1] == Marker) ||
-        (col + 1 <= game.size && game.board[row][col + 1] == Marker)
-        );
+    return isCellEmpty(game, row, col) && ((row - 1 >= 1 && game.board[row - 1][col] == Marker) ||
+                                           (row + 1 <= game.size && game.board[row + 1][col] == Marker) ||
+                                           (col - 1 >= 1 && game.board[row][col - 1] == Marker) ||
+                                           (col + 1 <= game.size && game.board[row][col + 1] == Marker));
 }
-bool hasValidMove(const GameBoard& game, char userMarker) {
-    for (int i = 1; i <= game.size; ++i) {
-        for (int j = 1; j <= game.size; ++j) {
-            if (isMovvalueid(game, i, j, userMarker)) {
+bool hasValidMove(const GameBoard &game, char userMarker)
+{
+    for (int i = 1; i <= game.size; ++i)
+    {
+        for (int j = 1; j <= game.size; ++j)
+        {
+            if (isMovvalueid(game, i, j, userMarker))
+            {
                 return true;
-            } 
+            }
         }
     }
     return false;
@@ -161,7 +169,21 @@ void playgame(GameBoard &game, char userMarker, char computerMarker)
 
     char marker = userMarker;
     char opmarker = computerMarker;
-    while (!isBoardFull(game)) {
+    while (!isBoardFull(game))
+    {
+        if (hasValidMove(game, marker))
+        {
+            if (marker == userMarker)
+            {
+                cout << "\nit's your turn \n\n";
+                int row, col;
 
+                cout << "Enter the row(1 ,2 , ... n): ";
+                cin >> row;
+
+                cout << "Enter the col(1 ,2 , ... n): ";
+                cin >> col;
+            }
+        }
     }
 }

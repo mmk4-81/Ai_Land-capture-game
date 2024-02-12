@@ -197,6 +197,16 @@ void playgame(GameBoard &game, char userMarker, char computerMarker)
 
                 cout << "Enter the col(1 ,2 , ... n): ";
                 cin >> col;
+                if (makeMove(game, row, col, marker))
+                {
+                    printBoard(game);
+                    marker = computerMarker;
+                    opmarker = userMarker;
+                }
+                else
+                {
+                    cout << "\nInvalid move! Try again." << endl;
+                }
             }
         }
     }

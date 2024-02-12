@@ -30,7 +30,17 @@ GameBoard createGameBoard(int n) {
     srand(static_cast<unsigned int>(time(nullptr)));
     int randomRowUser, randomColUser, randomRowComputer, randomColComputer;
 
-   
+   //random 
+    /*do {
+        randomRowUser = rand() % n + 1;
+        randomColUser = rand() % n + 1;
+        randomRowComputer = rand() % n + 1;
+        randomColComputer = rand() % n + 1;
+    } while ((randomRowUser == randomRowComputer && randomColUser == randomColComputer));
+
+    game.board[randomRowUser][randomColUser] = 'B';
+    game.board[randomRowComputer][randomColComputer] = 'R';*/
+    
     if (n % 2 == 0) {
         game.board[n / 2 + 1][n / 2] = 'B';
         game.board[n / 2][n / 2 + 1] = 'R';

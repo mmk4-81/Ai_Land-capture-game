@@ -14,6 +14,7 @@ GameBoard createGameBoard(int n);
 void destroyGameBoard(GameBoard &game);
 void printBoard(const GameBoard &game);
 bool isBoardFull(const GameBoard& game);
+bool isMovvalueid(const GameBoard& game, int row, int col, char userMarker);
 bool hasValidMove(const GameBoard& game, char userMarker);
 
 void playgame(GameBoard &game, char userMarker, char computerMarker);
@@ -131,6 +132,13 @@ bool isBoardFull(const GameBoard& game) {
         }
     }
     return true;
+}
+
+bool isMovvalueid(const GameBoard& game, int row, int col, char Marker) {
+    if (row < 1 || row > game.size || col < 1 || col > game.size) {
+        return false;
+    }
+   
 }
 
 bool hasValidMove(const GameBoard& game, char userMarker) {

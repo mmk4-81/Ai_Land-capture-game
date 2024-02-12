@@ -14,6 +14,8 @@ GameBoard createGameBoard(int n);
 void destroyGameBoard(GameBoard &game);
 void printBoard(const GameBoard &game);
 bool isBoardFull(const GameBoard& game);
+bool hasValidMove(const GameBoard& game, char userMarker);
+
 void playgame(GameBoard &game, char userMarker, char computerMarker);
 
 int main()
@@ -131,12 +133,21 @@ bool isBoardFull(const GameBoard& game) {
     return true;
 }
 
+bool hasValidMove(const GameBoard& game, char userMarker) {
+    for (int i = 1; i <= game.size; ++i) {
+        for (int j = 1; j <= game.size; ++j) {
+            
+        }
+    }
+    return false;
+}
+
 void playgame(GameBoard &game, char userMarker, char computerMarker)
 {
 
     char marker = userMarker;
     char opmarker = computerMarker;
     while (!isBoardFull(game)) {
-        
+
     }
 }

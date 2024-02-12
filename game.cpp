@@ -3,27 +3,38 @@
 #include <ctime>
 using namespace std;
 
-struct GameBoard {
-    char** board;
+struct GameBoard
+{
+    char **board;
     int size;
 };
 int boardSize;
 
 GameBoard createGameBoard(int n);
-void destroyGameBoard(GameBoard& game);
+void destroyGameBoard(GameBoard &game);
 
+int main()
+{
+    cout << "Enter the size of the game board: ";
+    cin >> boardSize;
 
-int main(){
+    GameBoard game = createGameBoard(boardSize);
+
+    char userMarker = 'B';
+    char computerMarker = 'R';
     return 0;
 }
 
-GameBoard createGameBoard(int n) {
+GameBoard createGameBoard(int n)
+{
     GameBoard game;
     game.size = n;
-    game.board = new char* [n + 1];
-    for (int i = 1; i <= n; i++) {
+    game.board = new char *[n + 1];
+    for (int i = 1; i <= n; i++)
+    {
         game.board[i] = new char[n + 1];
-        for (int j = 1; j <= n; j++) {
+        for (int j = 1; j <= n; j++)
+        {
             game.board[i][j] = ' ';
         }
     }
@@ -31,7 +42,7 @@ GameBoard createGameBoard(int n) {
     srand(static_cast<unsigned int>(time(nullptr)));
     int randomRowUser, randomColUser, randomRowComputer, randomColComputer;
 
-   //random 
+    // random
     /*do {
         randomRowUser = rand() % n + 1;
         randomColUser = rand() % n + 1;
@@ -42,21 +53,24 @@ GameBoard createGameBoard(int n) {
     game.board[randomRowUser][randomColUser] = 'B';
     game.board[randomRowComputer][randomColComputer] = 'R';*/
 
-    if (n % 2 == 0) {
+    if (n % 2 == 0)
+    {
         game.board[n / 2 + 1][n / 2] = 'B';
         game.board[n / 2][n / 2 + 1] = 'R';
     }
-    else {
+    else
+    {
         game.board[n / 2 + 1][n / 2] = 'B';
         game.board[n / 2 + 1][n / 2 + 1] = 'R';
-
     }
 
     return game;
 }
 
-void destroyGameBoard(GameBoard& game) {
-    for (int i = 1; i <= game.size; i++) {
+void destroyGameBoard(GameBoard &game)
+{
+    for (int i = 1; i <= game.size; i++)
+    {
         delete[] game.board[i];
     }
     delete[] game.board;

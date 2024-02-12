@@ -13,7 +13,8 @@ int boardSize;
 GameBoard createGameBoard(int n);
 void destroyGameBoard(GameBoard &game);
 void printBoard(const GameBoard &game);
-void playgame(GameBoard& game, char userMarker, char computerMarker);
+bool isBoardFull(const GameBoard& game);
+void playgame(GameBoard &game, char userMarker, char computerMarker);
 
 int main()
 {
@@ -26,7 +27,8 @@ int main()
     char computerMarker = 'R';
 
     printBoard(game);
-
+    playgame(game, userMarker, computerMarker);
+    destroyGameBoard(game);
     return 0;
 }
 
@@ -119,12 +121,22 @@ void printBoard(const GameBoard &game)
     cout << "+" << endl;
 }
 
+bool isBoardFull(const GameBoard& game) {
+    for (int i = 1; i <= game.size; i++) {
+        for (int j = 1; j <= game.size; j++) {
+            if (game.board[i][j] == ' ')
+                return false;
+        }
+    }
+    return true;
+}
 
-
-
-void playgame(GameBoard& game, char userMarker, char computerMarker) {
+void playgame(GameBoard &game, char userMarker, char computerMarker)
+{
 
     char marker = userMarker;
     char opmarker = computerMarker;
-   
+    while (!isBoardFull(game)) {
+        
+    }
 }

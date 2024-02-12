@@ -10,6 +10,7 @@ struct GameBoard {
 int boardSize;
 
 GameBoard createGameBoard(int n);
+void destroyGameBoard(GameBoard& game);
 
 
 int main(){
@@ -40,7 +41,7 @@ GameBoard createGameBoard(int n) {
 
     game.board[randomRowUser][randomColUser] = 'B';
     game.board[randomRowComputer][randomColComputer] = 'R';*/
-    
+
     if (n % 2 == 0) {
         game.board[n / 2 + 1][n / 2] = 'B';
         game.board[n / 2][n / 2 + 1] = 'R';
@@ -52,4 +53,11 @@ GameBoard createGameBoard(int n) {
     }
 
     return game;
+}
+
+void destroyGameBoard(GameBoard& game) {
+    for (int i = 1; i <= game.size; i++) {
+        delete[] game.board[i];
+    }
+    delete[] game.board;
 }

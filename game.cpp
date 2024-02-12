@@ -12,7 +12,8 @@ int boardSize;
 
 GameBoard createGameBoard(int n);
 void destroyGameBoard(GameBoard &game);
-void printBoard(const GameBoard& game);
+void printBoard(const GameBoard &game);
+void playgame(GameBoard& game, char userMarker, char computerMarker);
 
 int main()
 {
@@ -23,6 +24,9 @@ int main()
 
     char userMarker = 'B';
     char computerMarker = 'R';
+
+    printBoard(game);
+
     return 0;
 }
 
@@ -77,23 +81,30 @@ void destroyGameBoard(GameBoard &game)
     delete[] game.board;
 }
 
-void printBoard(const GameBoard& game) {
+void printBoard(const GameBoard &game)
+{
     cout << endl;
-    for (int i = 1; i <= game.size; i++) {
-        for (int j = 1; j <= game.size; j++) {
+    for (int i = 1; i <= game.size; i++)
+    {
+        for (int j = 1; j <= game.size; j++)
+        {
             cout << "+---";
         }
         cout << "+" << endl;
 
-        for (int j = 1; j <= game.size; j++) {
+        for (int j = 1; j <= game.size; j++)
+        {
             cout << "| ";
-            if (game.board[i][j] == 'B') {
+            if (game.board[i][j] == 'B')
+            {
                 cout << "\033[1;34mB\033[0m";
             }
-            else if (game.board[i][j] == 'R') {
+            else if (game.board[i][j] == 'R')
+            {
                 cout << "\033[1;31mR\033[0m";
             }
-            else {
+            else
+            {
                 cout << " ";
             }
             cout << " ";
@@ -101,8 +112,19 @@ void printBoard(const GameBoard& game) {
         cout << "|" << endl;
     }
 
-    for (int j = 1; j <= game.size; j++) {
+    for (int j = 1; j <= game.size; j++)
+    {
         cout << "+---";
     }
     cout << "+" << endl;
+}
+
+
+
+
+void playgame(GameBoard& game, char userMarker, char computerMarker) {
+
+    char marker = userMarker;
+    char opmarker = computerMarker;
+   
 }

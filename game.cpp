@@ -12,6 +12,7 @@ int boardSize;
 
 GameBoard createGameBoard(int n);
 void destroyGameBoard(GameBoard &game);
+void printBoard(const GameBoard& game);
 
 int main()
 {
@@ -74,4 +75,34 @@ void destroyGameBoard(GameBoard &game)
         delete[] game.board[i];
     }
     delete[] game.board;
+}
+
+void printBoard(const GameBoard& game) {
+    cout << endl;
+    for (int i = 1; i <= game.size; i++) {
+        for (int j = 1; j <= game.size; j++) {
+            cout << "+---";
+        }
+        cout << "+" << endl;
+
+        for (int j = 1; j <= game.size; j++) {
+            cout << "| ";
+            if (game.board[i][j] == 'B') {
+                cout << "\033[1;34mB\033[0m";
+            }
+            else if (game.board[i][j] == 'R') {
+                cout << "\033[1;31mR\033[0m";
+            }
+            else {
+                cout << " ";
+            }
+            cout << " ";
+        }
+        cout << "|" << endl;
+    }
+
+    for (int j = 1; j <= game.size; j++) {
+        cout << "+---";
+    }
+    cout << "+" << endl;
 }

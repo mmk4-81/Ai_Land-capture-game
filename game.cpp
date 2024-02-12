@@ -148,7 +148,9 @@ bool isMovvalueid(const GameBoard& game, int row, int col, char Marker) {
 bool hasValidMove(const GameBoard& game, char userMarker) {
     for (int i = 1; i <= game.size; ++i) {
         for (int j = 1; j <= game.size; ++j) {
-            
+            if (isMovvalueid(game, i, j, userMarker)) {
+                return true;
+            } 
         }
     }
     return false;

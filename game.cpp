@@ -193,8 +193,10 @@ int minmax(GameBoard& game, int depth, int alpha, int beta, bool isMax, char use
     }
 }
 int maxvalue(GameBoard& game, int depth, int alpha, int beta, char userMarker, char computerMarker) {
-    
-
+  
+    if (isBoardFull(game) || depth == 0) {
+        return utility(game, userMarker, computerMarker);
+    }
     int maxvalue = INT_MIN;
     for (int i = 1; i <= game.size; i++) {
         for (int j = 1; j <= game.size; j++) {

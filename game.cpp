@@ -19,7 +19,8 @@ bool isMovvalueid(const GameBoard &game, int row, int col, char userMarker);
 bool hasValidMove(const GameBoard &game, char userMarker);
 void markCell(GameBoard &game, int row, int col, char marker);
 bool makeMove(GameBoard &game, int row, int col, char userMarker);
-void computerMove(GameBoard& game, char computerMarker, char userMarker);
+void computerMove(GameBoard &game, char computerMarker, char userMarker);
+int minmax(GameBoard& game, int depth, int alpha, int beta, bool isMax, char userMarker, char computerMarker);
 
 void playgame(GameBoard &game, char userMarker, char computerMarker);
 
@@ -180,9 +181,44 @@ bool makeMove(GameBoard &game, int row, int col, char userMarker)
     }
     return false;
 }
+int minmax(GameBoard& game, int depth, int alpha, int beta, bool isMax, char userMarker, char computerMarker) {
+    if (isMax) {
+        // return maxvalue(game, depth, alpha, beta, userMarker, computerMarker);
+    }
+    else {
+        // return minvalue(game, depth, alpha, beta, userMarker, computerMarker);
+    }
+}
 
-void computerMove(GameBoard& game, char computerMarker, char userMarker) {
+void computerMove(GameBoard &game, char computerMarker, char userMarker)
+{
+    int bestMove = INT_MIN;
+    int besti, bestj;
+    int alpha = INT_MIN;
+    int beta = INT_MAX;
 
+    for (int i = 1; i <= game.size; i++)
+    {
+        for (int j = 1; j <= game.size; j++)
+        {
+            if (isMovvalueid(game, i, j, computerMarker))
+            {
+                markCell(game, i, j, computerMarker);
+            int moveValue = minmax(game, 9, alpha, beta, false, userMarker, computerMarker);
+                markCell(game, i, j, ' ');
+
+                if (moveValue >= bestMove) {
+                    bestMove = moveValue;
+                    besti = i;
+                    bestj = j;
+                }
+            }
+        }
+    }
+
+    markCell(game, besti, bestj, computerMarker);
+    cout << "\nComputer moved to row " << besti << ", column " << bestj << "." << endl;
+    printBoard(game);
 }
 
 void playgame(GameBoard &game, char userMarker, char computerMarker)
@@ -215,7 +251,8 @@ void playgame(GameBoard &game, char userMarker, char computerMarker)
                     cout << "\nInvalid move! Try again." << endl;
                 }
             }
-             else {
+            else
+            {
                 cout << "\nIt's computer's turn\n\n";
                 computerMove(game, computerMarker, userMarker);
                 marker = userMarker;

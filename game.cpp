@@ -24,8 +24,8 @@ int utility(const GameBoard &game, char userMarker, char computerMarker);
 int maxvalue(GameBoard &game, int depth, int alpha, int beta, char userMarker, char computerMarker);
 int minvalue(GameBoard &game, int depth, int alpha, int beta, char userMarker, char computerMarker);
 int minmax(GameBoard &game, int depth, int alpha, int beta, bool isMax, char userMarker, char computerMarker);
-void fillEmptyCells(GameBoard& game, char opMarker);
-
+void fillEmptyCells(GameBoard &game, char opMarker);
+void checkGameStatus(const GameBoard& game, char userMarker, char computerMarker);
 void playgame(GameBoard &game, char userMarker, char computerMarker);
 
 int main()
@@ -270,10 +270,14 @@ int utility(const GameBoard &game, char userMarker, char computerMarker)
 
     return computerCount - userCount;
 }
-void fillEmptyCells(GameBoard& game, char opMarker) {
-    for (int i = 1; i <= game.size; ++i) {
-        for (int j = 1; j <= game.size; ++j) {
-            if (game.board[i][j] == ' ') {
+void fillEmptyCells(GameBoard &game, char opMarker)
+{
+    for (int i = 1; i <= game.size; ++i)
+    {
+        for (int j = 1; j <= game.size; ++j)
+        {
+            if (game.board[i][j] == ' ')
+            {
                 game.board[i][j] = opMarker;
             }
         }
@@ -310,7 +314,33 @@ void computerMove(GameBoard &game, char computerMarker, char userMarker)
     cout << "\nComputer moved to row " << besti << ", column " << bestj << "." << endl;
     printBoard(game);
 }
+void checkGameStatus(const GameBoard& game, char userMarker, char computerMarker) {
+    int userCount = 0;
+    int computerCount = 0;
 
+    for (int i = 1; i <= game.size; ++i) {
+        for (int j = 1; j <= game.size; ++j) {
+            if (game.board[i][j] == userMarker) {
+                userCount++;
+            }
+            else if (game.board[i][j] == computerMarker) {
+                computerCount++;
+            }
+        }
+    }
+
+    cout << "\nuser = " << userCount << " VS  computer = " << computerCount << endl;
+
+    if (userCount > computerCount) {
+        cout << "You win!" << endl;
+    }
+    else if (userCount < computerCount) {
+        cout << "Computer wins!" << endl;
+    }
+    else {
+        cout << "It's a draw!" << endl;
+    }
+}
 void playgame(GameBoard &game, char userMarker, char computerMarker)
 {
 
@@ -349,7 +379,8 @@ void playgame(GameBoard &game, char userMarker, char computerMarker)
                 opmarker = computerMarker;
             }
         }
-         else {
+        else
+        {
             /*char temp;
             temp = marker;
             marker = computerMarker;
@@ -359,4 +390,7 @@ void playgame(GameBoard &game, char userMarker, char computerMarker)
             fillEmptyCells(game, opmarker);
         }
     }
+    cout << "\nGame over!" << endl;
+    printBoard(game);
+    // checkGameStatus(game, userMarker, computerMarker);
 }

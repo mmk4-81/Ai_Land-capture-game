@@ -24,6 +24,7 @@ int utility(const GameBoard &game, char userMarker, char computerMarker);
 int maxvalue(GameBoard &game, int depth, int alpha, int beta, char userMarker, char computerMarker);
 int minvalue(GameBoard &game, int depth, int alpha, int beta, char userMarker, char computerMarker);
 int minmax(GameBoard &game, int depth, int alpha, int beta, bool isMax, char userMarker, char computerMarker);
+void fillEmptyCells(GameBoard& game, char opMarker);
 
 void playgame(GameBoard &game, char userMarker, char computerMarker);
 
@@ -269,7 +270,15 @@ int utility(const GameBoard &game, char userMarker, char computerMarker)
 
     return computerCount - userCount;
 }
-
+void fillEmptyCells(GameBoard& game, char opMarker) {
+    for (int i = 1; i <= game.size; ++i) {
+        for (int j = 1; j <= game.size; ++j) {
+            if (game.board[i][j] == ' ') {
+                game.board[i][j] = opMarker;
+            }
+        }
+    }
+}
 void computerMove(GameBoard &game, char computerMarker, char userMarker)
 {
     int bestMove = INT_MIN;
@@ -339,6 +348,15 @@ void playgame(GameBoard &game, char userMarker, char computerMarker)
                 marker = userMarker;
                 opmarker = computerMarker;
             }
+        }
+         else {
+            /*char temp;
+            temp = marker;
+            marker = computerMarker;
+            computerMarker = temp;
+            opmarker = userMarker;*/
+            cout << userMarker << " has no valid moves." << endl;
+            fillEmptyCells(game, opmarker);
         }
     }
 }

@@ -188,11 +188,11 @@ int minmax(GameBoard &game, int depth, int alpha, int beta, bool isMax, char use
 {
     if (isMax)
     {
-        // return maxvalue(game, depth, alpha, beta, userMarker, computerMarker);
+        return maxvalue(game, depth, alpha, beta, userMarker, computerMarker);
     }
     else
     {
-        // return minvalue(game, depth, alpha, beta, userMarker, computerMarker);
+        return minvalue(game, depth, alpha, beta, userMarker, computerMarker);
     }
 }
 int maxvalue(GameBoard &game, int depth, int alpha, int beta, char userMarker, char computerMarker)

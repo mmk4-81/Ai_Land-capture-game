@@ -392,5 +392,5 @@ void playgame(GameBoard &game, char userMarker, char computerMarker)
     }
     cout << "\nGame over!" << endl;
     printBoard(game);
-    // checkGameStatus(game, userMarker, computerMarker);
+    checkGameStatus(game, userMarker, computerMarker);
 }

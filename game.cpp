@@ -20,10 +20,10 @@ bool hasValidMove(const GameBoard &game, char userMarker);
 void markCell(GameBoard &game, int row, int col, char marker);
 bool makeMove(GameBoard &game, int row, int col, char userMarker);
 void computerMove(GameBoard &game, char computerMarker, char userMarker);
-int utility(const GameBoard& game, char userMarker, char computerMarker);
-int maxvalue(GameBoard& game, int depth, int alpha, int beta, char userMarker, char computerMarker);
-int minvalue(GameBoard& game, int depth, int alpha, int beta, char userMarker, char computerMarker);
-int minmax(GameBoard& game, int depth, int alpha, int beta, bool isMax, char userMarker, char computerMarker);
+int utility(const GameBoard &game, char userMarker, char computerMarker);
+int maxvalue(GameBoard &game, int depth, int alpha, int beta, char userMarker, char computerMarker);
+int minvalue(GameBoard &game, int depth, int alpha, int beta, char userMarker, char computerMarker);
+int minmax(GameBoard &game, int depth, int alpha, int beta, bool isMax, char userMarker, char computerMarker);
 
 void playgame(GameBoard &game, char userMarker, char computerMarker);
 
@@ -184,23 +184,31 @@ bool makeMove(GameBoard &game, int row, int col, char userMarker)
     }
     return false;
 }
-int minmax(GameBoard& game, int depth, int alpha, int beta, bool isMax, char userMarker, char computerMarker) {
-    if (isMax) {
+int minmax(GameBoard &game, int depth, int alpha, int beta, bool isMax, char userMarker, char computerMarker)
+{
+    if (isMax)
+    {
         // return maxvalue(game, depth, alpha, beta, userMarker, computerMarker);
     }
-    else {
+    else
+    {
         // return minvalue(game, depth, alpha, beta, userMarker, computerMarker);
     }
 }
-int maxvalue(GameBoard& game, int depth, int alpha, int beta, char userMarker, char computerMarker) {
-  
-    if (isBoardFull(game) || depth == 0) {
+int maxvalue(GameBoard &game, int depth, int alpha, int beta, char userMarker, char computerMarker)
+{
+
+    if (isBoardFull(game) || depth == 0)
+    {
         return utility(game, userMarker, computerMarker);
     }
     int maxvalue = INT_MIN;
-    for (int i = 1; i <= game.size; i++) {
-        for (int j = 1; j <= game.size; j++) {
-            if (isMovvalueid(game, i, j, computerMarker)) {
+    for (int i = 1; i <= game.size; i++)
+    {
+        for (int j = 1; j <= game.size; j++)
+        {
+            if (isMovvalueid(game, i, j, computerMarker))
+            {
                 markCell(game, i, j, computerMarker);
                 int value = minmax(game, depth - 1, alpha, beta, false, userMarker, computerMarker);
                 markCell(game, i, j, ' ');
@@ -213,13 +221,20 @@ int maxvalue(GameBoard& game, int depth, int alpha, int beta, char userMarker, c
     }
     return maxvalue;
 }
-int minvalue(GameBoard& game, int depth, int alpha, int beta, char userMarker, char computerMarker) {
-
+int minvalue(GameBoard &game, int depth, int alpha, int beta, char userMarker, char computerMarker)
+{
+    if (isBoardFull(game) || depth == 0)
+    {
+        return utility(game, userMarker, computerMarker);
+    }
 
     int minvalue = INT_MAX;
-    for (int i = 1; i <= game.size; i++) {
-        for (int j = 1; j <= game.size; j++) {
-            if (isMovvalueid(game, i, j, userMarker)) {
+    for (int i = 1; i <= game.size; i++)
+    {
+        for (int j = 1; j <= game.size; j++)
+        {
+            if (isMovvalueid(game, i, j, userMarker))
+            {
                 markCell(game, i, j, userMarker);
                 int value = minmax(game, depth - 1, alpha, beta, true, userMarker, computerMarker);
                 markCell(game, i, j, ' ');
@@ -232,16 +247,21 @@ int minvalue(GameBoard& game, int depth, int alpha, int beta, char userMarker, c
     }
     return minvalue;
 }
-int utility(const GameBoard& game, char userMarker, char computerMarker) {
+int utility(const GameBoard &game, char userMarker, char computerMarker)
+{
     int userCount = 0;
     int computerCount = 0;
 
-    for (int i = 1; i <= game.size; ++i) {
-        for (int j = 1; j <= game.size; ++j) {
-            if (game.board[i][j] == userMarker) {
+    for (int i = 1; i <= game.size; ++i)
+    {
+        for (int j = 1; j <= game.size; ++j)
+        {
+            if (game.board[i][j] == userMarker)
+            {
                 userCount++;
             }
-            else if (game.board[i][j] == computerMarker) {
+            else if (game.board[i][j] == computerMarker)
+            {
                 computerCount++;
             }
         }
@@ -264,10 +284,11 @@ void computerMove(GameBoard &game, char computerMarker, char userMarker)
             if (isMovvalueid(game, i, j, computerMarker))
             {
                 markCell(game, i, j, computerMarker);
-            int moveValue = minmax(game, 9, alpha, beta, false, userMarker, computerMarker);
+                int moveValue = minmax(game, 9, alpha, beta, false, userMarker, computerMarker);
                 markCell(game, i, j, ' ');
 
-                if (moveValue >= bestMove) {
+                if (moveValue >= bestMove)
+                {
                     bestMove = moveValue;
                     besti = i;
                     bestj = j;

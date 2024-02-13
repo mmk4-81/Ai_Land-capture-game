@@ -19,6 +19,7 @@ bool isMovvalueid(const GameBoard &game, int row, int col, char userMarker);
 bool hasValidMove(const GameBoard &game, char userMarker);
 void markCell(GameBoard &game, int row, int col, char marker);
 bool makeMove(GameBoard &game, int row, int col, char userMarker);
+void computerMove(GameBoard& game, char computerMarker, char userMarker);
 
 void playgame(GameBoard &game, char userMarker, char computerMarker);
 
@@ -170,6 +171,7 @@ void markCell(GameBoard &game, int row, int col, char marker)
     game.board[row][col] = marker;
 }
 bool makeMove(GameBoard &game, int row, int col, char userMarker)
+
 {
     if (isMovvalueid(game, row, col, userMarker))
     {
@@ -178,6 +180,11 @@ bool makeMove(GameBoard &game, int row, int col, char userMarker)
     }
     return false;
 }
+
+void computerMove(GameBoard& game, char computerMarker, char userMarker) {
+
+}
+
 void playgame(GameBoard &game, char userMarker, char computerMarker)
 {
 
@@ -207,6 +214,12 @@ void playgame(GameBoard &game, char userMarker, char computerMarker)
                 {
                     cout << "\nInvalid move! Try again." << endl;
                 }
+            }
+             else {
+                cout << "\nIt's computer's turn\n\n";
+                computerMove(game, computerMarker, userMarker);
+                marker = userMarker;
+                opmarker = computerMarker;
             }
         }
     }
